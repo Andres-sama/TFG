@@ -1,0 +1,114 @@
+<body class="text-center">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+<html>
+
+<style>
+  .kh{
+    position:absolute;
+    top : 250;
+    z-index: 1;
+  }
+
+  .kh2
+  {
+    position:absolute;
+    left: 50px;
+    top : 250;
+    z-index: 2;
+  }
+
+  .b1
+  {
+    position:absolute;
+    z-index: 3;
+  }
+
+  .b2
+  {
+    position:absolute;
+    left : 90px;
+    z-index: 3;
+  }
+
+  td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  font-family: Tahoma, Geneva, sans-serif;
+  padding: 8px;
+  }
+
+  tr:nth-child(even) {
+  background-color: #dddddd;
+  font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  .button {
+    width: 70;
+    margin: auto;
+  }
+</style>
+
+<body class="text-center">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+<h2 class="cover-heading"><%= Nombre %>, ¡Bienvenido!</h2>
+<h2 class="cover-heading">Aquí tienes tus juegos de puntos</h2>
+<div class="container bg-light text-dark">
+  <table class="table table-striped">
+  <thead>
+  <tr>
+  <th>JUEGO ACTIVO</th>
+  <th>Puntos Totales</th>
+  <th>Modo</th>
+  </tr>
+  </thead>
+  <tbody>
+  <%table.forEach(function(entry) {%>
+    <%if (entry.JuegoActivo == 'true') { %>
+      <tr>
+      <td><%=entry.NombreJuego%></td>
+      <td><%=entry.Puntos%></td>
+      <td><%=entry.Modo%></td>
+      </tr>
+    <% } %>
+  <%});%>
+  </tbody>
+  </table>
+  </body>
+  </div>
+  </body>
+  <div>
+  <div class="container bg-light text-dark">
+    <table class="table table-striped">
+    <thead>
+    <tr>
+    <th>JUEGO INACTIVO</th>
+    <th>Puntos Totales</th>
+    <th>Modo</th>
+    </tr>
+    </thead>
+    <tbody>
+      <%table.forEach(function(entry) {%>
+        <%if (entry.JuegoActivo == 'false') { %>
+          <tr>
+          <td><%=entry.NombreJuego%></td>
+          <td><%=entry.Puntos%></td>
+          <td><%=entry.Modo%></td>
+          </tr>
+        <% } %>
+      <%});%>
+    </tbody>
+    </table>
+    </body>
+    </div>
+    </body>
+    <div>
+    <button onclick="goBack()" class='button'>Go Back</button>
+  </div>
+
+</html>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>

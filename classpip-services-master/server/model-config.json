@@ -1,0 +1,254 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "dbmongo"
+  },
+  "AccessToken": {
+    "dataSource": "dbmongo",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "dbmongo",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "dbmongo",
+    "public": false,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
+  },
+  "Role": {
+    "dataSource": "dbmongo",
+    "public": false
+  },
+  "Profesor": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "Alumno": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "Grupo": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "Equipo": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "Juego": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "JuegoDePuntos": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "Punto": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "Nivel": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "JuegoDeColeccion": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "Coleccion": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "Cromo": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "Album": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "ReglaManualColeccion": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "ReglaAutomaticaColeccion": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "JuegoDeCompeticion": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "ReglaManualCompeticion": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "ReglaAutomaticaCompeticion": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "Liga": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "Jornada": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "Partido": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "Matricula": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "AsignacionEquipo": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "AsignacionPuntoJuego": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "AlumnoJuegoDePuntos": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "EquipoJuegoDePuntos": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "HistorialPuntosAlumno": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "imagen": {
+    "dataSource": "imagenes",
+    "public": true
+  },
+  "Insignia": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "HistorialPuntosEquipo": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "AlumnoJuegoDeColeccion": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "AlbumEquipo": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "EquipoJuegoDeColeccion": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "JuegoDeCompeticionLiga": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "JornadaDeCompeticionLiga": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "EnfrentamientoLiga": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "AlumnoJuegoDeCompeticionLiga": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "EquipoJuegoDeCompeticionLiga": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "JuegoDeCompeticionFormulaUno": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "JornadaDeCompeticionFormulaUno": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "AlumnoJuegoDeCompeticionFormulaUno": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "EquipoJuegoDeCompeticionFormulaUno": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "Pregunta": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "Cuestionario": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "PreguntaDelCuestionario": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "PuntoGeolocalizable": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "Escenario": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "JuegoDeCuestionario": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "AlumnoJuegoDeCuestionario": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "SesionClase": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "AsistenciaClase": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "FamiliaAvatares": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "JuegoDeAvatar": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "AlumnoJuegoDeAvatar": {
+    "dataSource": "dbmongo",
+    "public": true
+  },
+  "RespuestaAlumnoJuegoDeCuestionario": {
+    "dataSource": "dbmongo",
+    "public": true
+  }
+}

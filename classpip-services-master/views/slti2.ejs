@@ -1,0 +1,80 @@
+<html>
+
+  <style>
+    .centerButton {
+      margin: 20;
+      position: absolute;
+      left: 47%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+    .buttonB:active{background-color: #0eb026a2;}
+    </style>
+
+  <script>
+    function showc1()
+    {
+      var element = document.getElementById("Cuestionarios1");
+      var button = document.getElementById("buttonC1");
+      if (element.style.display === "none")
+      {
+        element.style.display = "block";
+        element.style.backgroundColor = "#C3F6D5";
+        button.textContent = "Hide Cuestionarios"
+      } else
+      {
+        element.style.display = "none";
+        button.textContent = "Show Cuestionarios"
+      }
+    }
+    function showc2()
+    {
+      var element = document.getElementById("Cuestionarios2");
+      var button = document.getElementById("buttonC2");
+      if (element.style.display === "none")
+      {
+        element.style.display = "block";
+        element.style.backgroundColor = "#B6CAF9"
+        button.textContent = "Hide Cuestionarios 2"
+      } else
+      {
+        element.style.display = "none";
+        button.textContent = "Show Cuestionarios 2"
+      }
+    }
+  </script>
+
+  <div class ="centerButton">
+    <nav>
+      <ul>
+        <button id ="buttonC1" type="button" class="buttonB" onclick="showc1()">Show Cuestionarios</button>
+        <button id ="buttonC2" type="button" class="buttonB" onclick="showc2()">Show Cuestionarios 2</button>
+      </ul>
+    </nav>
+  </div>
+
+  <tbody>
+  <div id="Cuestionarios1" style="display:none; float:left;">
+    <h1 class="cover-heading">Profesor <%= Nombre %>, ¡Bienvenido!</h1>
+    <% for(var i=0; i<table.length; i++){ %>
+      <h2>Título: <%= table[i].title %></h2>
+      <h3>Descripción: <%= table[i].description %></h3>
+    <% } %>
+  </div>
+
+  <div id="Cuestionarios2"  style="display:none; float:right;">
+    <h1 class="cover-heading">Profesor2 <%= Nombre %>, ¡Bienvenido!</h1>
+    <% table.forEach(function(table){ %>
+      <h2><strong>Título: <%= table.title %></strong></h2>
+      <h3>Descripción: <%= table.description %></h3>
+    <% }) %>
+  </div>
+
+<button onclick="goBack()">Go Back</button>
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+  <div style="clear: both;"></div>
+</html>

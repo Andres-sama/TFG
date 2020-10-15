@@ -1,0 +1,297 @@
+<body class="text-center">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+<html>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+  td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  tr:nth-child(even) {
+  background-color: #d8d9d9;
+  font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  .button {
+    width: 100%;
+    padding: 5px;
+    background-color: #0f2d4b;
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ffffff;
+    font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  .buttonb {
+    width: 8%;
+    padding: 5px;
+    background-color: #0f2d4b;
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ffffff;
+    font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  .login-form:hover input[type="submit"]{
+    background-color: #78c57a;
+    color: white;
+    font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  .buttonRankPuntos:hover {
+    background-color: #057b6dbe;
+    color: white;
+    font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  .buttonCuestionario:hover {
+    background-color: #49c112b1;
+    color: white;
+    font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  .buttonColeccion:hover {
+    background-color: #dd6313b1;
+    color: white;
+    font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  .buttonAvatar:hover {
+    background-color: #1a90d9b1;
+    color: white;
+    font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  .buttonBack:hover {
+    background-color: #952807;
+    color: white;
+    font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  .login-form input[type="submit"] {
+    width: 100%;
+    padding: 5px;
+    background-color: #002d5b;
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ffffff;
+    font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  .container {
+    font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  .imgColeccion{
+    width:5%;
+}
+
+</style>
+<body class="text-center">
+  <div class="center">
+    <h2 class="cover-heading">¡Bienvenido <%= Nombre %>!<img download="avatar" src="<%=Avatar%>" width="70" height="70" style="vertical-align:middle;margin:0px 10px">Aquí tienes tus juegos</h2>
+  </div>
+  <div class="center">
+    </br>
+    <div class="container bg-light text-dark">
+      <div class="center">
+        <fieldset class="field">
+        <legend><svg height="13" width="15"><circle cx="8" cy="7" r="6" fill="green" /></svg> JUEGOS ACTIVOS</legend>
+        <table class="table table-striped">
+        <thead>
+        <tr>
+        <th>Nombre</th>
+        <th>Tipo</th>
+        <th>Puntos</th>
+        <th>Modo</th>
+        </tr>
+        </thead>
+        <% let miLista = [];%>
+        <tbody>
+        <%table.forEach(function(entry) {%>
+          <%if (entry.JuegoActivo == 'true') {%>
+            <tr>
+            <td>
+              <%=entry.NombreJuego%>
+            </td>
+            <td><%=entry.Tipo%></td>
+            <td><%=entry.Puntos%></td>
+            <td><%=entry.Modo%></td>
+            <%  if (entry.Tipo == 'Juego De Cuestionario') {%>
+              <td>
+              <button onclick="getCuestionario(`<%=entry.cuestionarioId%>`, `<%=entry.grupoId%>`, `<%=entry.juegoDeCuestionarioId%>`, `<%=entry.idCuestionarioAlumnoJuego%>`, `<%=entry.idAlumno%>`)" class='button buttonCuestionario' id="Cuestionario" ><i class="fa fa-pencil" style="color:white"></i></button>
+              </td>
+              <% }%>
+              <%  if (entry.Tipo == 'Juego De Colección') {%>
+              <td>
+              <button onclick="getColeccion(`<%=entry.coleccionId%>`, `<%=entry.grupoId%>`, `<%=entry.juegoDeColeccionId%>`, `<%=entry.idColeccionAlumnoJuego%>`, `<%=entry.idAlumno%>`)" class='button buttonColeccion' id="Coleccion" ><i class="fa fa-eye" style="color:white"></i></button>
+              </td>
+              <td class="imgColeccion"><img id="<%=entry.coleccionId%>" src="" width="100%"></td>
+              <% miLista.push(entry.coleccionId);%>
+              <% }%>
+              <%  if (entry.Tipo == 'Juego De Avatar') {%>
+                <td>
+                <button onclick="getAvatar(`<%=entry.juegoAvatarid%>`)" class='button buttonAvatar' id="Avatar" ><i class="fa fa-eye" style="color:white"></i></button>
+                </td>
+                <% }%>
+            </tr>
+          <% }%>
+        <%});%>
+        </tbody>
+        </table>
+        </fieldset>
+      </div>
+      </br></br>
+      <div class="center">
+        <fieldset class="field">
+        <legend><svg height="13" width="15"><circle cx="8" cy="7" r="6" fill="red" /></svg> JUEGOS INACTIVOS</legend>
+        <table class="table table-striped">
+        <thead>
+        <tr>
+        <th>Nombre</th>
+        <th>Tipo</th>
+        <th>Puntos</th>
+        <th>Modo</th>
+        <th>Ranking</th>
+        </tr>
+        </thead>
+        <tbody>
+          <%table.forEach(function(entry) {%>
+            <%if (entry.JuegoActivo == 'false') {%>
+              <tr>
+              <td><%=entry.NombreJuego%></td>
+              <td><%=entry.Tipo%></td>
+              <td><%=entry.Puntos%></td>
+              <td><%=entry.Modo%></td>
+              <td>
+                <% if (entry.Tipo == 'Juego de Competicion Liga') {%>
+                  <button onclick="getRankingCompeticion(`<%=entry.id%>`)" class='button buttonRankPuntos' id="RankingCompLiga" >Ver</button>
+                <% } else if (entry.Tipo == 'Juego De Competición Fórmula Uno') {%>
+                  <button onclick="getRankingCompeticionFU(`<%=entry.id%>`)" class='button buttonRankPuntos' id="RankingCompFU" >Ver</button>
+                <% } else if (entry.Tipo == 'Juego De Puntos') {%>
+                  <button onclick="getRankingPuntos(`<%=entry.id%>`, `<%=entry.idAlumno%>`)" class='button buttonRankPuntos' id="RankingPunt" >Ver</button>
+                <% } else if (entry.Tipo == 'Juego De Cuestionario') {%>
+                  <button onclick="getRankingCuestionario(`<%=entry.id%>`)" class='button buttonRankPuntos' id="RankingCuest" >Ver</button>
+                <% }%>
+              </td>
+              <% if (entry.Tipo == 'Juego De Cuestionario') {%>
+                <td><%=entry.Presentacion%></td>
+              <% }%>
+              </tr>
+            <% }%>
+          <%});%>
+        </tbody>
+        </table>
+        </fieldset>
+      </div>
+      </br></br>
+      <div class="center">
+        <fieldset class="field">
+        <legend><svg height="13" width="15"><circle cx="8" cy="7" r="6" fill="grey" /></svg> JUEGOS INCOMPLETOS</legend>
+        <table class="table table-striped">
+        <thead>
+        <tr>
+        <th>Nombre</th>
+        <th>Tipo</th>
+        <th>Puntos</th>
+        <th>Modo</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%table.forEach(function(entry) {%>
+          <%if (entry.JuegoActivo == 'null') {%>
+            <tr>
+            <td><%=entry.NombreJuego%></td>
+            <td><%=entry.Tipo%></td>
+            <td><%=entry.Puntos%></td>
+            <td><%=entry.Modo%></td>
+            </tr>
+          <% }%>
+        <%});%>
+        </tbody>
+        <body onload="getImagenColeccion();"></body>
+        </table>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+<script>
+  function getRankingPuntos(myid1, myuserid1) {
+    window.location.href = "/rankingPuntos/" + myid1 + "/" + myuserid1;
+  }
+
+  function getRankingCompeticion(myid2) {
+    window.location.href = "/rankingPuntos/" + myid2;
+  }
+
+  function getRankingCompeticionFU(myid3) {
+    window.location.href = "/rankingPuntos/" + myid3;
+  }
+
+  function getRankingCuestionario(myid4) {
+    window.location.href = "/rankingPuntos/" + myid4;
+  }
+
+  function getCuestionario(myid5, grupoId, juegoDeCuestionarioId, juegoalumnoCuestionarioId, alumnoId) {
+    window.location.href = "/Cuestionario/" + myid5 + "/" + grupoId + "/" + juegoDeCuestionarioId + "/" + juegoalumnoCuestionarioId + "/" + alumnoId;
+  }
+
+  function getColeccion(myid6, grupoId2, juegoDeCuoleccionId, juegoalumnoColeccionId, alumnoId) {
+    var isDosCaras = getDosCaras(myid6);
+    window.location.href = "/Coleccion/" + myid6 + "/" + grupoId2 + "/" + juegoDeCuoleccionId + "/" + juegoalumnoColeccionId + "/" + alumnoId + "/" + isDosCaras;
+  }
+
+  function getAvatar(myid7) {
+    window.location.href = "/Avatar/" + myid7;
+  }
+
+  function getImagenColeccion() {
+    var myLista = `<%= miLista %>`;
+    console.log("myList is: " + myList);
+    var myList = myLista.split(",");
+    for (let i = 0; i < myList.length; i++) {
+      var xmlHttp = new XMLHttpRequest();
+      console.log("myList[i] is: " + myList[i]);
+      var theUrl = "http://localhost:3000/api/Colecciones?filter[where][id]=" + myList[i];
+      xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+      xmlHttp.send( null );
+      var respuesta = JSON.parse(xmlHttp.responseText);
+      console.log('mi response es: ' + JSON.stringify(respuesta[0]));
+      var respuestaParsed = respuesta[0];
+      console.log('mi response es: ' + JSON.stringify(respuestaParsed.Nombre));
+      var imgURL = "http://localhost:3000/api/imagenes/ImagenColeccion/download/" + respuestaParsed.ImagenColeccion;
+      document.getElementById(myList[i]).src = imgURL;
+    }
+  }
+
+  function getDosCaras(myIdColeccion) {
+    var xmlHttp = new XMLHttpRequest();
+    var theUrl = "http://localhost:3000/api/Colecciones?filter[where][id]=" + myIdColeccion;
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    var respuesta = JSON.parse(xmlHttp.responseText);
+    console.log('mi response es: ' + JSON.stringify(respuesta[0]));
+    var respuestaParsed = respuesta[0];
+    console.log('mi response es: ' + JSON.stringify(respuestaParsed.DosCaras));
+    return respuestaParsed.DosCaras;
+  }
+
+</script>

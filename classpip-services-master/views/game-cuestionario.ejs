@@ -1,0 +1,159 @@
+<body class="text-center">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+<html>
+
+<style>
+  .b1
+  {
+    position:absolute;
+  }
+
+  .b2
+  {
+    position:absolute;
+    left : 100px;
+  }
+
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+    font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  .container {
+    font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  fieldset {
+    background-color: #ffffff;
+  }
+
+  legend {
+    background-color: #224475;
+    color: white;
+    padding: 5px 10px;
+    font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  .cover-container {
+    display: inline-block;
+  }
+
+  .disable {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+</style>
+
+<body class="text-center">
+  <div class="cover-container">
+    <fieldset class="field">
+    <legend>Cuestionario "<%=table[0].TituloC%>"</legend>
+    <%let y = 1;%>
+    <%let correctAnswers = [];%>
+    <%table.forEach(function(entry) {%>
+      <%for (let z = 0; z < entry.Preguntas.length; z++) {%>
+        <div id="quiz">
+          <form id="quizQuestion" name="quizQuestion<%=z%>">
+            <h4>Pregunta <%=y%>: <%=entry.Preguntas[z].Pregunta%></h4>
+            <div id="q"><input type="radio" name="q" value="<%=entry.Preguntas[z].RespuestaCorrecta%>"><%=entry.Preguntas[z].RespuestaCorrecta%></div>
+            <div id="q"><input type="radio" name="q" value="<%=entry.Preguntas[z].RespuestaIncorrecta1%>"><%=entry.Preguntas[z].RespuestaIncorrecta1%></div>
+            <div id="q"><input type="radio" name="q" value="<%=entry.Preguntas[z].RespuestaIncorrecta2%>"><%=entry.Preguntas[z].RespuestaIncorrecta2%></div>
+            <div id="q"><input type="radio" name="q" value="<%=entry.Preguntas[z].RespuestaIncorrecta3%>"><%=entry.Preguntas[z].RespuestaIncorrecta3%></div>
+            <%correctAnswers.push(entry.Preguntas[z].RespuestaCorrecta);%>
+          </form>
+        </div>
+        <%y++;%>
+      <%} %>
+    <%});%>
+      </fieldset>
+  </div>
+  </br></br>
+  <button onclick="cancel()" class='b2'>Cancel</button>
+  <button onclick="checkResults()" class='b1'>Answer</button>
+</body>
+</html>
+  <script>
+  var numQuestions = `<%=table[0].Preguntas.length%>`;
+  var formsDoc = document.forms;
+  var minimumChecked = false;
+  var answersFinal = "";
+  var correctAnswersList = `<%=correctAnswers%>`.split(",");
+
+  function loopInfo(numberOfQuestions, formsDocuments) {
+    var buttonsPushed = 0;
+    var answers = [];
+    var checked = [];
+
+    for (var o = 0; o < numberOfQuestions; o++) {
+      console.log(formsDocuments[o]);
+      for (var p = 0; p < formsDocuments[o].elements.length; p++) {
+        var inputElements = formsDocuments[o].getElementsByTagName('input');
+        if (inputElements[p].checked) {
+          buttonsPushed++;
+          console.log("buttonsPushed %s is " + buttonsPushed, p);
+        }
+        console.log(formsDocuments[o].elements["q"].value);
+    }
+    checked.push(buttonsPushed);
+    answers.push(formsDocuments[o].elements["q"].value.trim());
+    console.log("checked %o is " + checked, o);
+  }
+    console.log("buttonsPushed final is " + buttonsPushed);
+    answersFinal = answers;
+    return buttonsPushed;
+  }
+
+  function checkResults() {
+    var buttonIsPushed = loopInfo(numQuestions, formsDoc);
+    if (buttonIsPushed == numQuestions){
+      for (var o = 0; o < numQuestions; o++) {
+      console.log(formsDoc[o]);
+      for (var p = 0; p < formsDoc[o].elements.length; p++) {
+        var inputElements = formsDoc[o].getElementsByTagName('input');
+        inputElements[p].disabled = true;
+      }
+     }
+    }
+    if (buttonIsPushed == answersFinal.length){
+      var myAnswerScores = scoreCalc();
+      window.location.href = "/answerQuiz/" + `<%=table[0].idCuestionarioC%>` + "/" + `<%=table[0].GrupoId%>` + myAnswerScores + "/" + `<%=table[0].JuegoDeCuestionarioAlumnoId%>` + "/" + `<%=table[0].idAlumno%>`;
+    }
+    else {
+      alert("¡Necesitas contestar todas las preguntas!");
+    }
+
+  }
+
+  function scoreCalc(){
+    var myAnswers = "";
+    var scoresOK = 0;
+    var scoresKO = 0;
+    var scores = "";
+    for (var q = 0; q < answersFinal.length; q++){
+      myAnswers += "/" + answersFinal[q];
+      console.log("2 MY correctAnswersList IS: " + correctAnswersList[q]);
+      console.log("3 MY answersFinal IS: " + answersFinal[q]);
+      if (answersFinal[q] == correctAnswersList[q]) {
+        console.log("OKAY %s", q);
+        scoresOK++;
+        } else {
+          console.log("NOT OKAY %s", q);
+          scoresKO++;
+        }
+      }
+    scores = "/" + scoresOK + "/" + scoresKO + "/" + `<%=table[0].JuegoDeCuestionarioId%>`;
+    console.log("MY SCORE IS: " + scores);
+    return scores;
+  }
+  function cancel() {
+    window.history.back();
+  }
+  </script>

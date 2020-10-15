@@ -1,0 +1,34 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "dbmongo": {
+    "host": "localhost",
+    "port": 27017,
+    "database": "test_tfg_mongo",
+    "name": "dbmongo",
+    "connector": "mongodb"
+  },
+  "dbmysql": {
+    "host": "localhost",
+    "port": 3306,
+    "database": "test_mysql",
+    "password": "andres1997215",
+    "name": "dbmysql",
+    "user": "root",
+    "connector": "mysql"
+  },
+  "baseDatosEnMemoria": {
+    "name": "baseDatosEnMemoria",
+    "localStorage": "",
+    "file": "./data/db.json",
+    "connector": "memory"
+  },
+  "imagenes": {
+    "name": "imagenes",
+    "connector": "loopback-component-storage",
+    "provider": "filesystem",
+    "root": "./server/ficheros"
+  }
+}

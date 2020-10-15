@@ -1,0 +1,93 @@
+<body class="text-center">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+<html>
+
+<style>
+  .b1
+  {
+    position:absolute;
+  }
+
+  .b2
+  {
+    position:absolute;
+    left : 100px;
+  }
+
+  td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  tr:nth-child(even) {
+  background-color: #62d1d1;
+  font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  .container {
+    font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  fieldset {
+    background-color: #ffffff;
+  }
+
+  legend {
+    background-color: #224475;
+    color: white;
+    padding: 5px 10px;
+    font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  .cover-container {
+    display: inline-block;
+  }
+
+  .disable {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+</style>
+<body class="text-center">
+  <div class="center">
+    <fieldset class="field">
+    <legend><svg height="13" width="15"><circle cx="8" cy="7" r="6" fill="grey" /></svg> Album </legend>
+    <table class="table table-striped">
+    <tbody>
+      <tr>
+    <%let myCromos = [];%>
+    <%for (let z = 0; z < Coleccion.length; z++) {%>
+      <%if (Coleccion[z].ImagenCColeccionDelante == false) {%>
+        <td><img id="<%=z%>" download="cromo" src="http://localhost:3000/api/imagenes/ImagenCromo/download/<%=Coleccion[z].Imagen%>" width="100" style="vertical-align:middle;margin:0px 10px;filter: grayscale(100%);"></td>
+        <% } else {%>
+          <td><img id="<%=z%>" download="cromo" src="http://localhost:3000/api/imagenes/ImagenCromo/download/<%=Coleccion[z].ImagenCColeccionDelante%>" onmouseover="this.src='http://localhost:3000/api/imagenes/ImagenCromo/download/<%=Coleccion[z].ImagenCColeccionDetras%>';" onmouseout="this.src='http://localhost:3000/api/imagenes/ImagenCromo/download/<%=Coleccion[z].ImagenCColeccionDelante%>';" width="100" style="vertical-align:middle;margin:0px 10px;filter: grayscale(100%);"></td>
+          <% }%>
+        <%for (let y = 0; y < ColeccionAlumno.length; y++) {%>
+          <% if (JSON.stringify(Coleccion[z].idCColeccion) == JSON.stringify(ColeccionAlumno[y].cromoIdCColeccionAlumno)) {%>
+            <%myCromos.push(z);%>
+            <body onload="gotIt(`<%=z%>`)"></body>
+            <%y++;%>
+          <% }%>
+        <%}%>
+    <%}%>
+  </tr>
+    </tbody>
+    </table>
+    </fieldset>
+  </div>
+  </div>
+  </br></br>
+  <button onclick="cancel()" class='b2'>Atrás</button>
+</body>
+</html>
+<script>
+  function gotIt(myId) {
+    document.getElementById(myId).style.filter = "grayscale(0%)";
+  }
+  function cancel() {
+    window.history.back();
+  }
+</script>

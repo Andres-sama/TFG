@@ -1,0 +1,141 @@
+<body class="text-center">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+<html>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+  td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  .gold {
+    background-color: #fffb00;
+    font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  .silver {
+    background-color: #a7abab;
+    font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  .bronze {
+    background-color: #ca5d15d8;
+    font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  .buttonb {
+    padding: 5px;
+    background-color: #0f2d4b;
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ffffff;
+    font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  .buttonBack:hover {
+    background-color: #952807;
+    color: white;
+    font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  .login-form input[type="submit"] {
+    width: 100%;
+    padding: 5px;
+    background-color: #002d5b;
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ffffff;
+    font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  .container {
+    font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Tahoma, Geneva, sans-serif;
+  }
+
+</style>
+<body class="text-center" onload="myAlert()">
+  <div class="center">
+    </br>
+    <div class="container bg-light text-dark">
+      <div class="center">
+        <fieldset class="field">
+        <legend> <svg height="13" width="15"><circle cx="8" cy="7" r="6" fill="blue" /></svg> Ranking del juego<b><i>"<%=table[0].nombre%>"</i></b></legend>
+        <table class="table table-striped">
+        <thead>
+        <tr>
+        <th>Jugador</th>
+        <th>Puntos</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%table.forEach(function(entry, i) {%>
+            <tr>
+              <%listaAlumnos.forEach(function(entry2) {%>
+                <%if (entry2.id == entry.alumnoId) {%>
+                  <%if (i == 0) {%>
+                  <td class="gold">
+                    <%if (myId == entry.alumnoId) {%>
+                    <i class="fa fa-star checked"></i>
+                    <% }%>
+                    <%=entry2.Nombre + " " + entry2.PrimerApellido%>
+                  </td>
+                  <% } else if (i == 1) {%>
+                    <td class="silver">
+                      <%if (myId == entry.alumnoId) {%>
+                      <i class="fa fa-star checked"></i>
+                      <% }%>
+                      <%=entry2.Nombre + " " + entry2.PrimerApellido%>
+                    </td>
+                    <% } else if (i == 2) {%>
+                      <td class="bronze">
+                        <%if (myId == entry.alumnoId) {%>
+                        <i class="fa fa-star checked"></i>
+                        <% }%>
+                        <%=entry2.Nombre + " " + entry2.PrimerApellido%>
+                      </td>
+                      <% } else {%>
+                        <td>
+                          <%if (myId == entry.alumnoId) {%>
+                          <i class="fa fa-star checked"></i>
+                          <% }%>
+                          <%=entry2.Nombre + " " + entry2.PrimerApellido%>
+                        </td>
+                        <% }%>
+                <% }%>
+                <%});%>
+            <td><%=entry.Puntos%></td>
+            </tr>
+        <%});%>
+        </tbody>
+        </table>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+  </br></br></br></br>
+  <div class="center">
+    <button onclick="goBack()" class='buttonb buttonBack'>Go Back</button>
+  </div>
+</body>
+</html>
+<script>
+  function myAlert() {
+    alert("Aquí puedes ver el ranking del juego de Puntos seleccionado.\n\nTu puesto del ranking está marcado con una estrella");
+  }
+  function goBack() {
+    window.history.back();
+  }
+</script>

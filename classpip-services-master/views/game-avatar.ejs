@@ -1,0 +1,109 @@
+<body class="text-center">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+<html>
+
+<style>
+  td, th {
+  border: 1px solid #dddddd;
+  font-family: Tahoma, Geneva, sans-serif;
+  color: white;
+  text-align: left;
+  padding: 8px;
+  }
+
+  tr:nth-child(even) {
+  background-color: #dddddd;
+  font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  .cover-container {
+    display: inline-block;
+    margin-right: 3%;
+  }
+
+  .avatarBase {
+    position: relative;
+  }
+
+  .avatar {
+    position: absolute;
+    top: 45;
+    left: 10;
+  }
+</style>
+
+<body class="text-center" style="display:flex">
+  <div class="cover-container">
+    <legend style="font-family: Tahoma, Geneva, sans-serif;"><svg height="13" width="15"><circle cx="8" cy="7" r="6" fill="black" /></svg> Mi Avatar</legend>
+    </br>
+    <%table.forEach(function(entry) {%>
+      <img class="avatarBase" src="http://localhost:3000/api/imagenes/ImagenesAvatares/download/<%=entry.Silueta%>">
+      <% if (entry.Privilegios[0] == true) {%>
+      <img class='avatar' src="http://localhost:3000/api/imagenes/ImagenesAvatares/download/<%=entry.Complemento1%>">
+      <% } else {%>
+         <p style="font-family: Tahoma, Geneva, sans-serif;">No puedes ver el complemento 1</p>
+      <% }%>
+      <% if (entry.Privilegios[1] == true) {%>
+      <img class="avatar" src="http://localhost:3000/api/imagenes/ImagenesAvatares/download/<%=entry.Complemento2%>">
+      <% } else {%>
+         <p style="font-family: Tahoma, Geneva, sans-serif;">No puedes ver el complemento 2</p>
+      <% }%>
+      <% if (entry.Privilegios[2] == true) {%>
+      <img class="avatar" src="http://localhost:3000/api/imagenes/ImagenesAvatares/download/<%=entry.Complemento3%>">
+      <% } else {%>
+         <p style="font-family: Tahoma, Geneva, sans-serif;">No puedes ver el complemento 3</p>
+      <% }%>
+      <% if (entry.Privilegios[3] == true) {%>
+      <img class="avatar" src="http://localhost:3000/api/imagenes/ImagenesAvatares/download/<%=entry.Complemento4%>">
+      <% } else {%>
+         <p style="font-family: Tahoma, Geneva, sans-serif;">No puedes ver el complemento 4</p>
+      <% }%>
+    </br></br>
+    <legend style="font-family: Tahoma, Geneva, sans-serif;"><svg height="13" width="15"><circle cx="8" cy="7" r="6" fill="brown" /></svg> Mi voz</legend>
+    </br>
+      <% if (entry.Privilegios[4] == true) {%>
+        <% if (entry.Voz != '') {%>
+        <audio src="http://localhost:3000/api/imagenes/ImagenesAvatares/download/<%=entry.Voz%>" preload="none" controls></audio>
+        <% } else {%>
+           <p style="font-family: Tahoma, Geneva, sans-serif;">No tienes un fichero de Voz</p>
+        <% }%>
+      <% } else {%>
+         <p style="font-family: Tahoma, Geneva, sans-serif;">No puedes ver la nota de voz</p>
+      <% }%>
+    <% });%>
+  </div>
+</div>
+<div class="cover-container">
+</div>
+    <div class="cover-container">
+    <legend style="font-family: Tahoma, Geneva, sans-serif;"><svg height="13" width="15"><circle cx="8" cy="7" r="6" fill="yellow" /></svg> Mis privilegios</legend>
+    </br>
+    <table>
+      <tbody>
+        <thead>
+          <tr>
+          <%table.forEach(function(entry2) {%>
+            <%for (let i = 0; i < 5; i++) {%>
+              <%if (entry2.Privilegios[i] == true) {%>
+                <th style="background-color: #28c65a"><%=Object.keys(entry2)[i + 2]%></th>
+              <% }%>
+              <%if (entry2.Privilegios[i] == false) {%>
+                <th style="background-color: #ff0000"><%=Object.keys(entry2)[i + 2]%></th>
+              <% }%>
+            <% }%>
+          <% });%>
+          </tr>
+        </thead>
+      </tbody>
+    </table>
+  </div>
+</br></br>
+  </body>
+<div class="center">
+  <button onclick="goBack()" class='buttonb buttonBack'>Go Back</button>
+</html>
+<script>
+  function goBack() {
+    window.history.back();
+  }
+  </script>
